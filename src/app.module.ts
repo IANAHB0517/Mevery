@@ -4,10 +4,21 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
 import { UserModule } from './user/user.module';
+import { GoogleStrategy } from './google.strategy';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [AuthModule, CommonModule, UserModule],
+  imports: [
+    AuthModule,
+    CommonModule,
+    UserModule,
+    // .env 파일의 내용을 불러오기 위해 process.env를 사용함 이를 config 모듈을 import 해준다
+    ConfigModule.forRoot({
+      // ConfigModule을 전역으로 사용할 것인가
+      isGlobal: true,
+    }),
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GoogleStrategy],
 })
 export class AppModule {}

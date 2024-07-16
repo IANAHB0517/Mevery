@@ -37,7 +37,7 @@ lerna-debug.log*
 
 # dotenv environment variable files
 # 초반 세팅을 위해 env 파일의 ignore를 해제해둠
-# .env 
+.env 
 .env.development.local
 .env.test.local
 .env.production.local
