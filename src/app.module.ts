@@ -6,6 +6,8 @@ import { CommonModule } from './common/common.module';
 import { UserModule } from './user/user.module';
 import { GoogleStrategy } from './google.strategy';
 import { ConfigModule } from '@nestjs/config';
+import { ormConfig } from './orm.config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { ConfigModule } from '@nestjs/config';
       // ConfigModule을 전역으로 사용할 것인가
       isGlobal: true,
     }),
+    TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
   ],
   controllers: [AppController],
   providers: [AppService, GoogleStrategy],

@@ -18,6 +18,14 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
+  // refreshToken을 얻고 싶다면 해당 메서드 설정 필수
+  authorizationParams(): { [key: string]: string } {
+    return {
+      access_type: 'offline',
+      prompt: 'select_account',
+    };
+  }
+
   async validate(
     accessToken: string,
     refreshToken: string,
@@ -31,6 +39,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       lastName: name.givenName,
       picture: photos[0].value,
       accessToken,
+      refreshToken,
     };
     done(null, user);
   }
